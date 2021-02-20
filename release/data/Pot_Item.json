@@ -1,0 +1,26 @@
+{
+    "Up" : true,
+    "Total" : 1000,
+    "Rate_Five" : 6, 
+    "Rate_Four" : 51,
+    "Rate_Three" : 943,
+    "Rate_Up_Total" : 2,
+    "Rate_Up" : 1,
+    "Guarantee_Five" : 90,
+    "Guarantee_Four" : 10,
+    "Five_Star_Up" : [
+        "刻晴"
+    ],
+    "Five_Star" : [
+        "莫娜","琴","迪卢克","七七"
+    ],
+    "Four_Star_Up" : [
+        "凝光","班尼特","芭芭拉"
+    ],
+    "Four_Star" : [
+        "其它四星"
+    ],
+    "Three_Star" : [
+        "垃圾三星武器"
+    ]
+}
