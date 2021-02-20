@@ -1,0 +1,54 @@
+{
+    "pull" : {
+        "Called_Func" : "pull",
+        "Help" : "Let's PULLLLLLLLL!!!",
+        "Args" : [
+            {
+                "Name" : "--time",
+                "Default" : "1",
+                "Type" : "java.lang.Integer",
+                "Explain" : "Time you want to pull"
+            }
+        ]
+    },
+    "showinfo" : {
+        "Called_Func" : "potinfo",
+        "Help" : "Print pot info",
+        "Args" : []
+    },
+    "summary" : {
+        "Called_Func" : "summary",
+        "Help" : "Summary",
+        "Args" : []
+    },
+    "history" : {
+        "Called_Func" : "history",
+        "Help" : "Get history pulls",
+        "Args" : [
+            {
+                "Name" : "--max_line",
+                "Default" : "65535",
+                "Type" : "java.lang.Integer",
+                "Explain" : "number of pull history"
+            },
+            {
+                "Name" : "--latest_date",
+                "Default" : "0000-00-00 00:00:00",
+                "Type" : "java.lang.String",
+                "Explain" : "latest date time"
+            },
+            {
+                "Name" : "--output_to",
+                "Default" : "sysout",
+                "Type" : "java.lang.String",
+                "Explain" : "Output target sysout to print"
+            },
+            {
+                "Name" : "--DESC",
+                "Default" : "false",
+                "Type" : "java.lang.Boolean",
+                "Explain" : "out put by desc"
+            }
+        ]
+    }
+}
