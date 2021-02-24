@@ -1,8 +1,8 @@
 # Ganshin Impact Pull Simulator
 **原神抽卡模拟器开发手册 0.0.1**  
-***2020/2/18***  
+***2021/2/18***  
 **Powered by** ***Ag2s***  
-**Developed by Virtual Studio Code**
+**Developed by Visual Studio Code**
 ****
 
 ## 介绍
