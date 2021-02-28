@@ -164,6 +164,8 @@ public class orderProcessor {
             } else {
                 help();
             }
+        } else if (line_array[0]=="sys") {
+            
         } else {
             try{
                 Execute(line_array);
@@ -174,7 +176,4 @@ public class orderProcessor {
             }
         }
     }
-
-    
-
 }

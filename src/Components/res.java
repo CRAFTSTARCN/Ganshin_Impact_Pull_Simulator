@@ -1,5 +1,8 @@
 package Components;
 
+import org.fusesource.jansi.*;
+import org.fusesource.jansi.Ansi.Color;
+
 public class res {
     private int Id;
     private int star;
@@ -32,8 +35,9 @@ public class res {
         return Id;
     }
 
-    public String toString() {
-        return star + "星物品 "+ name;
+    public String toString() {    
+        String str = star + "星物品 "+ name;
+        return str;
     }
 
     public int Get_Star() {
@@ -62,5 +66,14 @@ public class res {
             buff.append(" 当期Up获得");
         }
         return buff.toString();
+    }
+
+    public String Colored_Full_Info() {
+        if(star == 5) {
+            return Ansi.ansi().fg(Color.RED).a(Full_Info()).reset().toString();
+        } else if (star == 4) {
+            return Ansi.ansi().fg(Color.GREEN).a(Full_Info()).reset().toString();
+        }
+        return Full_Info();
     }
 }

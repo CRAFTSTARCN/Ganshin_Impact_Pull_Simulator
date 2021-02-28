@@ -16,7 +16,7 @@ public class App {
             System.exit(1);
         }
         System.out.println("=====================================================");
-        System.out.println("Ganshin Impact Pull Simulator 0.0.2 alpha 2021-02-19");
+        System.out.println("Ganshin Impact Pull Simulator 0.1.0 2021-02-27");
         System.out.println("Powered by Ag2S");
         System.out.println("Enter \"help\" to get a quick start");
         Scanner line_reader = new Scanner(System.in);

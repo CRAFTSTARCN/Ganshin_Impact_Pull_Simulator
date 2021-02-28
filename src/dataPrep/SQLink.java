@@ -64,7 +64,33 @@ public class SQLink {
         return;
     }
 
+    static boolean Date_Check(String date) {
+        if(date.length() == 10) {
+            for(int i=0; i<10; i+=1) {
+                if(i==4 || i==7) {
+                    if(date.charAt(i) != '-') return false;
+                } else if(date.charAt(i) > '9' || date.charAt(i) < '0') return false;
+            }
+            return true;
+        } else if(date.length() == 19) {
+            for(int i=0; i<19; i+=1) {
+                if(i==4 || i==7) {
+                    if(date.charAt(i) != '-') return false;
+                } else if(i==10) {
+                    if(date.charAt(i) != ' ') return false;
+                } else if(i==13 || i==16) {
+                    if(date.charAt(i) != ':') return false;
+                } else if(date.charAt(i) > '9' || date.charAt(i) < '0') return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
     public static void Wirte_History(String Item_Name, int star, String Time_Token, int Is_Up) throws Exception {
+        if(!Date_Check(Time_Token)) {
+            throw new Exception("Invalid Date Time");
+        }
         PreparedStatement stm = null;
         try {
             String sql = "INSERT INTO History Values(NULL,?,?,?,?)";
@@ -86,6 +112,9 @@ public class SQLink {
     }
     
     public static List<res> Get_History(int total, String last_date) throws Exception {
+        if(!Date_Check(last_date)) {
+            throw new Exception("Invalid Date Time");
+        }
         ResultSet res_set = null;
         PreparedStatement stm = null;
         List<res> res_list = new ArrayList<res>();
@@ -190,6 +219,29 @@ public class SQLink {
             }
         }
         return res;
+    }
+
+    public static void Delete(String from_date, String to_date) throws Exception {
+        PreparedStatement stm = null;
+        if(!Date_Check(from_date) || !Date_Check(to_date)) {
+            throw new Exception("Invalid Date Time");
+        }
+        try {
+            String sql = "DELETE FROM History WHERE Pull_Time >= ? AND Pull_Time <= ?";
+            stm = conn.prepareStatement(sql);
+            stm.setString(1, from_date);
+            stm.setString(2, to_date);
+            stm.execute();
+        } catch (Exception e) {
+            conn.rollback();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            throw new SQLException("An sql exception has bean thrown");
+        } finally {
+            conn.commit();
+            if(stm != null) {
+                stm.close();
+            }
+        }
     }
 
 }

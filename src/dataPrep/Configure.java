@@ -12,6 +12,17 @@ public class Configure {
 
     public static void Init() throws Exception {
         System.out.print("Loading configures paraments...");
+        Reload();
+        System.out.print("Success \n");
+    }
+
+    public static void Reload() throws Exception {
+        total = 0; 
+        Since_Last_Five = 0; 
+        Since_Last_Four = 0;
+        Since_Last_Up_Five = 0;
+        Since_Last_Up_Four = 0;
+        
         total = SQLink.Total();
         List<res> res_list = SQLink.Get_History(90, "0000-00-00 00:00:00");
         boolean get_four = false, get_five = false;
@@ -48,6 +59,5 @@ public class Configure {
                 break;
             }
         }
-        System.out.print("Success \n");
     }
 }

@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
+import org.fusesource.jansi.Ansi.Color;
+
 import com.google.gson.*;
 import dataPrep.*;
 
@@ -56,6 +60,7 @@ public class Pot {
         /* init static variables */
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
+        AnsiConsole.systemInstall();
         try {
             info = gson.fromJson(fileReader.Read_Text_File(Item_Path), Pot_Info.class);
         } catch(FileNotFoundException e) {
@@ -73,6 +78,7 @@ public class Pot {
     /* single pull */
     private static res Single_Pull() {
         int code = Random_Gener.nextInt(info.Total);
+        /* core random system */
         Configure.total += 1;
         if(code < info.Rate_Five || Configure.Since_Last_Five == info.Guarantee_Five - 1) {
             Configure.Since_Last_Five = 0;
@@ -120,6 +126,7 @@ public class Pot {
                 fw.Write_Line(Res_List.get(i).Full_Info());
             }
         }
+        fw.Close();
     }
 
     /* public interface, pulling args : time */
@@ -129,7 +136,13 @@ public class Pot {
             java.util.Date dnow = new java.util.Date();
             String now = fmt.format(dnow);
             res resault =  Single_Pull();
-            System.out.println( now + " 获得：" + resault.toString());
+            if(resault.Get_Star() == 4) {
+                System.out.println(now + " 获得：" + Ansi.ansi().fg(Color.GREEN).a(resault.toString()).reset());
+            } else if(resault.Get_Star() == 5) {
+                System.out.println(now + " 获得：" + Ansi.ansi().fg(Color.RED).a(resault.toString()).reset());
+            } else {
+                System.out.println(now + " 获得：" + resault.toString());
+            }
             SQLink.Wirte_History(resault.Get_Name(), resault.Get_Star(), now,resault.Up() ? 1 : 0);
         }
     }
@@ -144,11 +157,11 @@ public class Pot {
         }
         if(DESC) {
             for(int i=res_list.size(); i>0; i-=1) {
-                System.out.println(res_list.get(i-1).Full_Info());
+                System.out.println(res_list.get(i-1).Colored_Full_Info());
             }
         } else {
             for(int i=0; i<res_list.size(); i+=1) {
-                System.out.println(res_list.get(i).Full_Info());
+                System.out.println(res_list.get(i).Colored_Full_Info());
             }
         }
     }
@@ -170,4 +183,26 @@ public class Pot {
         System.out.println("Since Last Up Four: " + Configure.Since_Last_Up_Four);
     }
 
+    public static void clean_up(String from_date, String to_date) throws Exception {
+        from_date = from_date.replace('_', ' ');
+        to_date = to_date.replace('_', ' ');
+        SQLink.Delete(from_date, to_date);
+        Configure.Reload();
+    }
+
+    public static void load_history(String filename) throws Exception {
+        fileReader reader = new fileReader(filename);
+        String line = null;
+        while(true) {
+            line =  reader.Read_Line();
+            if(line == "") break;
+            String[] cols = line.split(",");
+            if(cols.length < 4) {
+                throw new Exception("invalid data format" + line);
+            }
+            SQLink.Wirte_History(cols[0], Integer.valueOf(cols[1]).intValue(), cols[2], Integer.valueOf(cols[3]).intValue());
+        }
+        Configure.Reload();
+        reader.Close();
+    }
 }
