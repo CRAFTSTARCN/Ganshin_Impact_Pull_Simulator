@@ -10,7 +10,8 @@ github: [Ganshin_Impact_Pull_Simulator](https://github.com/CRAFTSTARCN/Ganshin_I
 | 版本号 | 发布时间 | 备注 |
 |:-:|:-:|:-:|
 |0.0.1|2021/2/17|完成框架和基础功能|
-|0.0.2|2020/2/19|完成基本功能|
+|0.0.2|2021/2/19|完成基本功能|
+|0.1.0|2021/2/27|增加彩色显示<br>增加删除和导入历史功能|
 
 ## 注意
 请勿更改或者删除data内或者config内文件，否则会导致Fatal Error
@@ -47,8 +48,9 @@ java --enable-preview -jar .\Ganshin_Pull_Simulate.jar
 | 命令 | 参数(以;分隔 =号后为默认) | 描述 | 加入版本 | 最新版本
 |:-:|:-:|:-:|:-:|:-:|
 |help|任意个数字符串|查看帮助，参数为需要帮助的命令|0.0.1|0.0.2|
-|pull|--time=1;|抽一发|0.0.1|0.0.1|
+|pull|--time=1;|抽一发|0.0.1|0.1.0|
 |showinfo|/|查看当前卡池信息|0.0.1|0.0.1|
 |summary|/|查看总结|0.0.2|0.0.2|
-|history|--max_line=65535;<br>--latest_date=0000-00-00_00:00:00;<br>--output_to=sysout;<br>--DESC=false;|查看历史信息，参数为：<br>最大条目;<br>最低日期（日期时间以_连接）;<br>输出到（sysout为打印到屏幕）;<br>是否按照新旧顺序降序|0.0.2|0.0.2|
+|history|--max_line=65535;<br>--latest_date=0000-00-00_00:00:00;<br>--output_to=sysout;<br>--DESC=false;|查看历史信息，参数为：<br>最大条目;<br>最低日期（日期时间以_连接）;<br>输出到（sysout为打印到屏幕）;<br>是否按照新旧顺序降序|0.0.2|0.1.0|
+|cleanup|--from_date;<br>--to_date;|删除历史信息<br>删除起始日期;<br>删除终止日期;|0.1.0|0.1.0|
 |exit|/|退出|0.0.1|0.0.1|

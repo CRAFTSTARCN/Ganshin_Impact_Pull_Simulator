@@ -50,5 +50,35 @@
                 "Explain" : "out put by desc"
             }
         ]
+    },
+    "cleanup" : {
+        "Called_Func" : "clean_up",
+        "Help" : "Clean up some pull history",
+        "Args" : [
+            {
+                "Name" : "--from_date" ,
+                "Default" :"0000-00-00 00:00:00",
+                "Type" : "java.lang.String",
+                "Explain" : "Date, pulls after this will be delete"
+            },
+            {
+                "Name" : "--to_date" ,
+                "Default" :"9999-12-31 23:59:59",
+                "Type" : "java.lang.String",
+                "Explain" : "Date, pulls after this will be delete"
+            }
+        ]
+    },
+    "load" : {
+        "Called_Func" : "load_history",
+        "Help" : "load history from txt file",
+        "Args" : [
+            {
+                "Name" : "--filename" ,
+                "Default" :"",
+                "Type" : "java.lang.String",
+                "Explain" : "text file path"
+            }
+        ]
     }
 }
